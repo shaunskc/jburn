@@ -1,0 +1,8 @@
+{% for entry in entries %}
+    <div class="hero-unit">
+        <a class="btn btn-mini btn-info link-btn" href="{{ url('dictionary_lookup_kanji',{'kanji':entry.kanji}) }}">Link to this entry</a>
+        <h1>{{ entry.kanji }}</h1>      
+        <h2>{{ entry.reading }}</h2>
+        <p>{{ entry.meanings }}</p>
+    </div>
+{% endfor %}
