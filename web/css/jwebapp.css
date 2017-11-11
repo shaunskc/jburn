@@ -1,0 +1,12 @@
+
+#user-box {
+    float: right;
+    padding: 10px;
+}
+
+#site-title a {
+    padding:10px;
+    font-size: 26pt;
+    color: red;
+    text-decoration: none;
+}
