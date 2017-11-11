@@ -11,3 +11,9 @@ body {
     color: darkred;
     text-decoration: none;
 }
+
+.error-message {
+    color: red;
+    font-size: 18pt;
+    margin-bottom: 10px;
+}
