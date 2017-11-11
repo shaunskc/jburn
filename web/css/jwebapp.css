@@ -17,3 +17,7 @@ body {
     font-size: 18pt;
     margin-bottom: 10px;
 }
+
+.link-btn {
+    float:right;
+}

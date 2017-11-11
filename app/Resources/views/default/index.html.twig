@@ -4,5 +4,8 @@
     <div class="hero-unit">
         <h1>JWebApp</h1>      
         <p>This is the JWebApp.</p>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
     </div>
 {% endblock %}
