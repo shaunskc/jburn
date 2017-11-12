@@ -29,6 +29,13 @@
                     </div>
                 </div>
             </div>
+                      
+            {% if dictionarySearchForm|default(null) %}
+            <div class="container">
+                {% include('@Dictionary/searchForm.html.twig') %}
+            </div>
+            {% endif %}
+                        
         {% endblock %}
         <div class="container">
             {% block body %}{% endblock %}

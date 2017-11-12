@@ -1,0 +1,5 @@
+{{ form_start(dictionarySearchForm) }}
+{{ form_row(dictionarySearchForm.query, 
+{'label':'Search the dictionary:','value':currentQuery|default('')}) }}
+<input type="submit" class="btn btn-success" value="Go">
+{{ form_end(dictionarySearchForm) }}
