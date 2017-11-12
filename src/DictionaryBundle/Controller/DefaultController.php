@@ -14,18 +14,18 @@ class DefaultController extends Controller
     /**
      * @Route("/dictionary/search_post", name="dictionary_search_post")
      */
-    public function searchPosAction()
+    public function searchPosAction(Request $request)
     {
-        // TODO: Fetch post data through the framework.
-        if(
-            !isset($_POST) || 
-            !isset($_POST['form']) || 
-            !isset($_POST['form']['Search'])
-        ){
-            throw $this->createNotFoundException("No search query given.");
+        // This route is reached when searching via the search form.
+        // The request is redirected so that the search appears in the url.
+        $form = $this->createForm(\DictionaryBundle\Form\SearchFormType::class,
+                null, ['router'=>$this->get('router')]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            return $this->redirectToRoute('dictionary_search', ['query'=>$data['query']]);   
         }
-        $query = $_POST['form']['Search'];
-        return $this->redirectToRoute('dictionary_search', ['query'=>$query]);
+        throw $this->createNotFoundException("No search query given.");
     }
     
     /**
@@ -34,7 +34,7 @@ class DefaultController extends Controller
     public function searchAction($query)
     {
         $entries = $this->repo()->findBySearchQuery($query, 20);
-        return $this->showEntries($entries);
+        return $this->showEntries($entries, $query);
     }
     
     /**
@@ -52,7 +52,7 @@ class DefaultController extends Controller
     public function wordLookupAction($kanji)
     {
         $entry = $this->repo()->findOneBy(["kanji"=>$kanji]);
-        return $this->showEntries([$entry]);
+        return $this->showEntries([$entry], $kanji);
     }
     
     private function repo()
@@ -60,12 +60,19 @@ class DefaultController extends Controller
         return $this->getDoctrine()->getManager()->getRepository('DictionaryBundle:DictionaryEntry');
     }
     
-    private function showEntries($entries)
+    private function showEntries($entries, $query="")
     {
         if($entries === null){
             throw $this->createNotFoundException("Entry not found.");
         }
         
-        return $this->render('DictionaryBundle:Search:lookup.html.twig', ['entries' => $entries]);
+        $form = $this->createForm(\DictionaryBundle\Form\SearchFormType::class,
+                null,
+                ['router'=>$this->get('router')]);
+        
+        return $this->render('DictionaryBundle:Search:lookup.html.twig', [
+            'entries' => $entries, 
+            'dictionarySearchForm'=>$form->createView(), 
+            'currentQuery'=>$query]);
     }
 }
