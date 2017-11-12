@@ -1,12 +1,12 @@
 <?php
 
-namespace DictionaryBundle\Entity;
+namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
 
 /**
- * @ORM\Entity(repositoryClass="DictionaryBundle\Repository\DictionaryEntryRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\DictionaryEntryRepository")
  * @ORM\Table(name="dictionary_entries",indexes={@Index(name="reading_idx", columns={"reading"})})
  */
 class DictionaryEntry 

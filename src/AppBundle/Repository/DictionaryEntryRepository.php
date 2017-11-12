@@ -1,12 +1,12 @@
 <?php
 
-namespace DictionaryBundle\Repository;
+namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
 class DictionaryEntryRepository extends EntityRepository
 {
-    private $base = 'SELECT e FROM DictionaryBundle:DictionaryEntry e WHERE';
+    private $base = 'SELECT e FROM AppBundle:DictionaryEntry e WHERE';
     private $results;
     private $limit;
     private $query;

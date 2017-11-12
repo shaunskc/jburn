@@ -13,7 +13,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $form = $this->createForm(\DictionaryBundle\Form\SearchFormType::class,
+        $form = $this->createForm(\AppBundle\Form\SearchFormType::class,
                 null,
                 ['router'=>$this->get('router')]);
         

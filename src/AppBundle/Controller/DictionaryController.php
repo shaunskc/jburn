@@ -1,14 +1,14 @@
 <?php
 
-namespace DictionaryBundle\Controller;
+namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-use \DictionaryBundle\Entity\DictionaryEntry;
+use \AppBundle\Entity\DictionaryEntry;
 
-class DefaultController extends Controller
+class DictionaryController extends Controller
 {
     
     /**
@@ -18,7 +18,7 @@ class DefaultController extends Controller
     {
         // This route is reached when searching via the search form.
         // The request is redirected so that the search appears in the url.
-        $form = $this->createForm(\DictionaryBundle\Form\SearchFormType::class,
+        $form = $this->createForm(\AppBundle\Form\SearchFormType::class,
                 null, ['router'=>$this->get('router')]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -57,7 +57,7 @@ class DefaultController extends Controller
     
     private function repo()
     {
-        return $this->getDoctrine()->getManager()->getRepository('DictionaryBundle:DictionaryEntry');
+        return $this->getDoctrine()->getManager()->getRepository('AppBundle:DictionaryEntry');
     }
     
     private function showEntries($entries, $query="")
@@ -66,11 +66,11 @@ class DefaultController extends Controller
             throw $this->createNotFoundException("Entry not found.");
         }
         
-        $form = $this->createForm(\DictionaryBundle\Form\SearchFormType::class,
+        $form = $this->createForm(\AppBundle\Form\SearchFormType::class,
                 null,
                 ['router'=>$this->get('router')]);
         
-        return $this->render('DictionaryBundle:Search:lookup.html.twig', [
+        return $this->render('lookup.html.twig', [
             'entries' => $entries, 
             'dictionarySearchForm'=>$form->createView(), 
             'currentQuery'=>$query]);
