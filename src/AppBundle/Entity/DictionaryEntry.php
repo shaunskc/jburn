@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping\Index;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\DictionaryEntryRepository")
- * @ORM\Table(name="dictionary_entries",indexes={@Index(name="reading_idx", columns={"reading"})})
+ * @ORM\Table(name="dictionary_entries",indexes={@Index(name="reading_idx", columns={"reading"}),@Index(name="kanji_idx", columns={"kanji"})})
  */
 class DictionaryEntry 
 {
@@ -19,7 +19,7 @@ class DictionaryEntry
     protected $id;
     
     /**
-     * @ORM\Column(type="string", name="kanji", unique=true)
+     * @ORM\Column(type="string", name="kanji")
      */
     private $kanji;
 
